@@ -1,10 +1,10 @@
 #Instalar opencv en el servidor que usemos
 import os,json,requests
-from flask import Flask, request, redirect, url_for, flash,send_from_directory
+from flask import Flask, request, redirect, url_for, flash,send_from_directory,jsonify,make_response
 from werkzeug.utils import secure_filename
 from watson_developer_cloud import VisualRecognitionV3
 #asi se hace un post desde consola
-#curl -F "file=@/home/mhincapie/Imágenes/oe.png" http://127.0.0.1:5000/
+#curl -F "file=@/home/mhincapie/Imágenes/oe.png" http://127.0.0.1:8000/
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = APP_ROOT + '/uploads'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
@@ -39,7 +39,10 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            
+            return make_response(jsonify({
+        'status': 'bien',
+        'message': 'message'
+    })), 200 
             return redirect(url_for('uploaded_file',
                                     filename=filename))
     return '''
