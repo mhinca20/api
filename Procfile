@@ -1,1 +1,1 @@
-web: gunicorn app:app
+python src/flaskejm3.py
