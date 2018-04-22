@@ -23,7 +23,6 @@ pyasn1==0.3.7
 pycairo==1.15.3
 pycparser==2.14
 pycrypto==2.6.1
-pygobject==3.26.1
 PyNaCl==1.1.2
 pyOpenSSL==17.5.0
 requests==2.18.4
