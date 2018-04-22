@@ -3,8 +3,8 @@ from flask import Flask, request, redirect, url_for, flash,send_from_directory
 from werkzeug.utils import secure_filename
 #asi se hace un post desde consola
 #curl -F "file=@/home/mhincapie/Imágenes/oe.png" http://127.0.0.1:5000/
-
-UPLOAD_FOLDER = '/home/mhincapie/Documentos/universidad/Semestre_7/Integrador2/api/uploads'
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLDER = APP_ROOT + '/uploads'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
@@ -23,6 +23,8 @@ def upload_file():
         if 'file' not in request.files:
             flash('No file part')
             return redirect(request.url)
+        if not os.path.isdir(UPLOAD_FOLDER):
+            os.mkdir(UPLOAD_FOLDER)
         file = request.files['file']
         # if user does not select file, browser also
         # submit a empty part without filename
