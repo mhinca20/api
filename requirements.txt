@@ -19,7 +19,6 @@ paramiko==2.3.2
 pathlib2==2.1.0
 pipenv==11.10.0
 ply==3.9
-protobuf==3.3.1
 pyasn1==0.3.7
 pycairo==1.15.3
 pycparser==2.14
