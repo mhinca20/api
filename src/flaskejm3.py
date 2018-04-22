@@ -1,5 +1,5 @@
 #Instalar opencv en el servidor que usemos
-import os,json,requests,cv2
+import os,json,requests
 from flask import Flask, request, redirect, url_for, flash,send_from_directory
 from werkzeug.utils import secure_filename
 from watson_developer_cloud import VisualRecognitionV3
