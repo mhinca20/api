@@ -41,10 +41,11 @@ def upload_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             #No funciona en el momento el call porque el trashminator solo ejecuta desde la carpeta
-            #call(["python","../../plantificator/trashminator.py"])
+			###ruta = ruta al directorio que contiene a trashmiantor.py
+            call(["python","[ruta]trashminator.py", "[ruta]"])
             return redirect(url_for('uploaded_file',
                                     filename=filename))
-            
+
     return '''
     <!doctype html>
     <title>Upload new File</title>
@@ -63,4 +64,4 @@ def uploaded_file(filename):
 #return make_response(jsonify({
 #        'status': 'bien',
 #        'message': 'message'
-#    })), 200 
+#    })), 200
