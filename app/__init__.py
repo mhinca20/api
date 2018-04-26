@@ -1,5 +1,6 @@
 #Instalar opencv en el servidor que usemos
-import os,json,requests
+import os,json,requests,sys
+from subprocess import call
 from flask import Flask, request, redirect, url_for, flash,send_from_directory,jsonify,make_response
 from werkzeug.utils import secure_filename
 from watson_developer_cloud import VisualRecognitionV3
@@ -39,8 +40,11 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            #No funciona en el momento el call porque el trashminator solo ejecuta desde la carpeta
+            #call(["python","../../plantificator/trashminator.py"])
             return redirect(url_for('uploaded_file',
                                     filename=filename))
+            
     return '''
     <!doctype html>
     <title>Upload new File</title>
