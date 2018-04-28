@@ -7,7 +7,7 @@ from watson_developer_cloud import VisualRecognitionV3
 #asi se hace un post desde consola
 #curl -F "file=@/home/mhincapie/Imágenes/oe.png" http://127.0.0.1:8000/
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-UPLOAD_FOLDER = APP_ROOT + '/uploads'
+UPLOAD_FOLDER = '/home/user1/plantificator/testeo'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 visual_recognition = VisualRecognitionV3(
 	'2016-05-20',
@@ -42,7 +42,7 @@ def upload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             #No funciona en el momento el call porque el trashminator solo ejecuta desde la carpeta
 			###ruta = ruta al directorio que contiene a trashmiantor.py
-            call(["python","[ruta]trashminator.py", "[ruta]"])
+            call(["python3.6","../../plantificator/trashminator.py", " ../../plantificator/"])
             return redirect(url_for('uploaded_file',
                                     filename=filename))
 
