@@ -49,13 +49,13 @@ def upload_file():
             try:
                 os.remove(VIEW_FOLDER+filename)
             except: pass
-            print(result,filename)
             if result=='sinPlagas':
                 result=False
             else:
                 result=True
+            print(result,filename)
             imginf=filename.split("_")
-            r = requests.post("https://tucultivo.herokuapp.com/groves/"+imginf[2] +"/values", data={ 'imginf':          
+            r = requests.post("https://tucultivo.herokuapp.com/grooves/"+imginf[2] +"reports", data={ 'imginf':          
                 jsonify({
                     'result' : result
                 })
