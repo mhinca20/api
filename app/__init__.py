@@ -14,7 +14,7 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 visual_recognition = VisualRecognitionV3(
         '2016-05-20',
         api_key="4893812447dc238483d5c01a41dfc798057baaeb")
-
+        
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['VIEW_FOLDER'] = VIEW_FOLDER
@@ -55,11 +55,7 @@ def upload_file():
                 result=True
             print(result,filename)
             imginf=filename.split("_")
-            r = requests.post("https://tucultivo.herokuapp.com/grooves/"+imginf[2] +"reports", data={ 'imginf':          
-                jsonify({
-                    'result' : result
-                })
-            })
+            r = requests.post("https://tucultivo.herokuapp.com/grooves/"+imginf[2] +"/reports", data={ 'imginf':result})
             return redirect(url_for('uploaded_file',
                                     filename=filename))
 
