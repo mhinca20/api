@@ -3,6 +3,7 @@ from flask import Flask, request, redirect, url_for, flash,send_from_directory,j
 from werkzeug.utils import secure_filename
 from watson_developer_cloud import VisualRecognitionV3
 import app.ibmClasificator as ibm                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+import os
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = '/home/user1/plantificator/testeo'
