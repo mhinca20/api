@@ -46,7 +46,20 @@ def upload_file():
                         ###ruta = ruta al directorio que contiene a trashmiantor.py                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
             call(["python3.6","../plantificator/trashminator.py", "../plantificator"])
             result=ibm.ibmClasificator(filename)
+            try:
+                os.remove(VIEW_FOLDER+filename)
+            except: pass
             print(result,filename)
+            if result=='sinPlagas':
+                result=False
+            else:
+                result=True
+            imginf=filename.split("_")
+            r = requests.post("https://tucultivo.herokuapp.com/groves/"+imginf[2] +"/values", data={ 'imginf':          
+                jsonify({
+                    'result' : result
+                })
+            })
             return redirect(url_for('uploaded_file',
                                     filename=filename))
 
