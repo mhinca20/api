@@ -4,7 +4,7 @@ from subprocess import call
 from flask import Flask, request, redirect, url_for, flash,send_from_directory,jsonify,make_response
 from werkzeug.utils import secure_filename
 from watson_developer_cloud import VisualRecognitionV3
-import ensayoIBM as clasificator
+import ibmClasificator as ibm
 #asi se hace un post desde consola                                                                                                                                                                                                                                                                                                                
 #curl -F "file=@/home/mhincapie/Imágenes/oe.png" http://127.0.0.1:8000/                                                                                                                                                                                                                                                                           
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -45,7 +45,7 @@ def upload_file():
             #No funciona en el momento el call porque el trashminator solo ejecuta desde la carpeta                                                                                                                                                                                                                                               
                         ###ruta = ruta al directorio que contiene a trashmiantor.py                                                                                                                                                                                                                                                               
             call(["python3.6","../plantificator/trashminator.py", "../plantificator"])
-            result=clasificator.ibmClasificator(filename)
+            result=ibm.ibmClasificator(filename)
             print(result,filename)
             return redirect(url_for('uploaded_file',
                                     filename=filename))
