@@ -14,6 +14,7 @@ visual_recognition = VisualRecognitionV3(
         api_key="4893812447dc238483d5c01a41dfc798057baaeb")
         
 app = Flask(__name__)
+app.secret_key='tuCultivo'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['VIEW_FOLDER'] = VIEW_FOLDER
 #Comprobar si el archivo tiene extencion valida                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
@@ -27,7 +28,7 @@ def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
         if 'file' not in request.files:
-            flash('No file part')
+            print('No file part')
             return redirect(request.url)
         if not os.path.isdir(UPLOAD_FOLDER):
             os.mkdir(UPLOAD_FOLDER)
@@ -35,7 +36,7 @@ def upload_file():
         # if user does not select file, browser also                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
         # submit a empty part without filename                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
         if file.filename == '':
-            flash('No selected file')
+            print('No selected file')
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
@@ -56,16 +57,17 @@ def upload_file():
                 result=True
             print(result,filename)
             imginf=filename.split("_")
-            #now = datetime.datetime.now()
-            #datenow=str(now.year)+'-'+str(now.month)+'-'+str(now.day)
+            now = datetime.datetime.now()
+            datenow=str(now.year)+'-'+str(now.month)+'-'+str(now.day)
             #enviar resultado a la pagina
-            #r = requests.post("https://tucultivo.herokuapp.com/grooves/"+imginf[2] +"/reports", 
-            #    data={ 
-            #        'plague_report':{
-            #            'reportDate':datenow,
-            #            'result':result
-            #        }
-            #    })
+            r = requests.post("https://tucultivo.herokuapp.com/grooves/"+imginf[2] +"/reports", 
+                data=json.dumps({
+                    'Content-Type': 'application/json',
+                    'plague_report':{
+                        'reportDate':datenow,
+			'result':result
+                    }
+                }))
             return redirect(url_for('uploaded_file',
                                     filename=filename))
 
@@ -74,7 +76,7 @@ def upload_file():
     <title>tuCultivoApi</title>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
     <h1>Subir nueva foto</h1>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
     <form method=post enctype=multipart/form-data>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-      <p><input type=file name=Foto>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+      <p><input type=file name=file>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
          <input type=submit value=Subir>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
     </form>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
     '''
