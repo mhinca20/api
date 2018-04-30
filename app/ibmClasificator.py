@@ -1,6 +1,5 @@
 import json
 import requests
-import cv2
 from watson_developer_cloud import VisualRecognitionV3
 import os
 
