@@ -1,4 +1,4 @@
-import os,json,requests,sys
+import os,json,requests,sys,datetime
 from subprocess import call
 from flask import Flask, request, redirect, url_for, flash,send_from_directory,jsonify,make_response
 from werkzeug.utils import secure_filename
@@ -56,8 +56,16 @@ def upload_file():
                 result=True
             print(result,filename)
             imginf=filename.split("_")
+            now = datetime.datetime.now()
+            datenow=str(now.year)+'-'+str(now.month)+'-'+str(now.day)
             #enviar resultado a la pagina
-            r = requests.post("https://tucultivo.herokuapp.com/grooves/"+imginf[2] +"/reports", data={ 'imginf':result})
+            r = requests.post("https://tucultivo.herokuapp.com/grooves/"+imginf[2] +"/reports", 
+                data={ 
+                    'plague_report':{
+                        'reportDate':datenow,
+                        'result',result
+                    }
+                })
             return redirect(url_for('uploaded_file',
                                     filename=filename))
 
