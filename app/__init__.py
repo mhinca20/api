@@ -56,16 +56,16 @@ def upload_file():
                 result=True
             print(result,filename)
             imginf=filename.split("_")
-            now = datetime.datetime.now()
-            datenow=str(now.year)+'-'+str(now.month)+'-'+str(now.day)
+            #now = datetime.datetime.now()
+            #datenow=str(now.year)+'-'+str(now.month)+'-'+str(now.day)
             #enviar resultado a la pagina
-            r = requests.post("https://tucultivo.herokuapp.com/grooves/"+imginf[2] +"/reports", 
-                data={ 
-                    'plague_report':{
-                        'reportDate':datenow,
-                        'result':result
-                    }
-                })
+            #r = requests.post("https://tucultivo.herokuapp.com/grooves/"+imginf[2] +"/reports", 
+            #    data={ 
+            #        'plague_report':{
+            #            'reportDate':datenow,
+            #            'result':result
+            #        }
+            #    })
             return redirect(url_for('uploaded_file',
                                     filename=filename))
 
