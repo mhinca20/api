@@ -60,14 +60,16 @@ def upload_file():
             now = datetime.datetime.now()
             datenow=str(now.year)+'-'+str(now.month)+'-'+str(now.day)
             #enviar resultado a la pagina
-            r = requests.post("https://tucultivo.herokuapp.com/grooves/"+imginf[2] +"/reports", 
+            r=requests.post("https://tucultivo.herokuapp.com/farms/"+imginf[0]+"/lots/"+imginf[1]+"/grooves/"+imginf[2]+"/plague_reports",
                 data=json.dumps({
-                    'Content-Type': 'application/json',
                     'plague_report':{
                         'reportDate':datenow,
-			'result':result
+                        'result':result
                     }
-                }))
+                }),
+                headers={'Content-Type': 'application/json'}
+            )
+
             return redirect(url_for('uploaded_file',
                                     filename=filename))
 
