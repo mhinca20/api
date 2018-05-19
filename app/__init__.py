@@ -62,7 +62,7 @@ def upload_file():
                 data=json.dumps({
                     'plague_report':{
                         'reportDate':datenow,
-                        'result':result
+                        'sick_plant':{'location':imginf[3]}
                     }
                 }),
                 headers={'Content-Type': 'application/json',
