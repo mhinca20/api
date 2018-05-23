@@ -10,8 +10,9 @@ visual_recognition = VisualRecognitionV3(
         api_key="4893812447dc238483d5c01a41dfc798057baaeb")
 
 ############# Funcion para llamar al clasificador de ibm ############                                                                                                                           \
-result=[]                                                                                                                                                                                                 
+                                                                                                                                                                                               
 def ibmClasificator():
+        result=[]  
         files_path = '/home/user1/plantificator/output/'
         for files in os.listdir(files_path):
                 file_path = files_path+ files
@@ -27,6 +28,9 @@ def ibmClasificator():
                                                                                                                                                                                                         
                 predict = classes["images"][0]["classifiers"][0]["classes"][0]["class"]
                 result.append(predict)
+                try:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+                        os.remove(file_path)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+                except: pass 
         return result
 
 ########### posts de simulacion de sensores ####################                                                                                                                                \
