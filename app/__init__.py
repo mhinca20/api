@@ -110,8 +110,13 @@ def upload_file():
                     )
                 print(result,namesN[n])
                 n+=1
-            return redirect(url_for('uploaded_file',
-                                        filename=namesN[0]))
+            return '''                                                                                                                                                                           
+                        <!doctype html>
+                        <title>tuCultivoApi</title>                                                                                                                                                          
+                        las fotos del lote de su cultivo se subieron satisfactoriamente
+                        <br>
+                        </form>
+                '''
 
 
     return '''                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
